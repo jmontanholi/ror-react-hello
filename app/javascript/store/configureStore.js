@@ -1,33 +1,34 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { GET_GREETING, GET_GREETING_SUCCESS } from '../components/HelloWorld';
 
 const initialState = {
   greeting: 'Hello From Redux',
-  loading: false
+  loading: false,
 };
 
 function rootReducer(state, action) {
   switch (action.type) {
     case GET_GREETING:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case GET_GREETING_SUCCESS:
-      return { ...state, greeting: action.payload}
+      return { ...state, greeting: action.payload };
     default:
-      return state
+      return state;
   }
 }
 
 export default function configureStore() {
   const store = createStore(
-    rootReducer, 
+    rootReducer,
     initialState,
     composeWithDevTools(
       applyMiddleware(
         thunk,
-      )
-    )
+      ),
+    ),
   );
-  return store
+  return store;
 }
